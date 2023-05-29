@@ -1,0 +1,61 @@
+image: registry.gitlab.com/dozatordev/devops/images/java-dind-builder:$JAVA_DIND_BUILDER_VER
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx256m"
+
+stages:
+  - build
+  - deploy
+  - snyk
+
+build:
+  stage: build
+  script:
+    - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com 2>1
+    - sh gradlew jar jib -Pdocker.tag=${CI_PIPELINE_ID}
+  only:
+    - master
+    - develop
+  tags:
+    - dev
+
+deploy-develop:
+  image: registry.gitlab.com/dozatordev/devops/images/deployer:$HELM_ANSIBLE_DEPLOYER_VER
+  stage: deploy
+  script:
+    - echo $HELM_DEV_KUBECONF | base64 -d > kubeconf
+    - echo $ANSIBLE_VAULT_DEV_PASS | base64 -d > ansiblepass
+    - chmod 600 kubeconf
+    - chmod 600 ansiblepass
+    - ansible-vault decrypt --vault-password-file ./ansiblepass chart/secrets-develop.yaml
+    - helm upgrade --install dozator-be chart -f chart/secrets-develop.yaml -f chart/values-develop.yaml --namespace dozator-dev --kubeconfig=kubeconf --set image.tag=${CI_PIPELINE_ID} --atomic --timeout 5m
+  only:
+    - develop
+  tags:
+    - dev
+
+deploy-master:
+  image: registry.gitlab.com/dozatordev/devops/images/deployer:$HELM_ANSIBLE_DEPLOYER_VER
+  stage: deploy
+  script:
+    - echo $HELM_MASTER_KUBECONF | base64 -d > kubeconf
+    - echo $ANSIBLE_VAULT_MASTER_PASS | base64 -d > ansiblepass
+    - chmod 600 kubeconf
+    - chmod 600 ansiblepass
+    - ansible-vault decrypt --vault-password-file ./ansiblepass chart/secrets-master.yaml
+    - helm upgrade --install dozator-be chart -f chart/secrets-master.yaml -f chart/values-master.yaml --namespace dozator-master --kubeconfig=kubeconf --set image.tag=${CI_PIPELINE_ID} --atomic --timeout 5m
+  only:
+    - master
+  tags:
+    - master
+
+snyk:
+  stage: snyk
+  tags:
+    - dev
+  only:
+    - develop
+  script:
+    - apk add --no-cache nodejs npm
+    - npm i -g snyk
+    - snyk container monitor --app-vulns --username=$CI_REGISTRY_USER --password=$CI_REGISTRY_PASSWORD registry.gitlab.com/dozatordev/dozator-be-mono/dozator-api:$CI_PIPELINE_ID

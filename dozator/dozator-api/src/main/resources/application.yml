@@ -1,0 +1,118 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8901
+  http2:
+    enabled: true
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    io.dozator: DEBUG
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    ROOT: INFO
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: dozator-api
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      indent_output: true
+      fail-on-empty-beans: false
+    mapper:
+      accept-case-insensitive-enums: true
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?rewriteBatchedStatements=true&assumeMinServerVersion=9.0
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    validationQuery: SELECT 1
+    batch-size: 20000
+    max-active: 10
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
+      idleTimeout: 30000
+      poolName: SpringBootJPAHikariCP
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+    tomcat:
+      max-active: 3
+  jpa:
+    open-in-view: true
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+        generate_statistics: false
+        temp.use_jdbc_metadata_defaults: false
+        default_schema: public
+        id.new_generator_mappings: true
+        cache.use_query_cache: false
+        ddl-auto: none
+        hbm2ddl.auto: none
+        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        show_sql: false
+        format_sql: false
+        enable_lazy_load_no_trans: true
+        event:
+          merge:
+            entity_copy_observer: allow
+  data:
+    mongodb:
+      host: ${MONGO_INITDB_ROOT_HOST}
+      port: ${MONGO_INITDB_ROOT_PORT}
+      database: ${MONGO_INITDB_ROOT_DATABASE}
+      username: ${MONGO_INITDB_ROOT_USERNAME}
+      password: ${MONGO_INITDB_ROOT_PASSWORD}
+    jpa:
+      repositories:
+        bootstrap-mode: lazy
+  liquibase:
+    enabled: true
+    change-log: classpath:liquibase/master.xml
+    user: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    url: ${spring.datasource.url}
+    drop-first: false
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+      enabled: true
+      file-size-threshold: 12KB
+  rabbitmq:
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3s
+          max-attempts: 6
+          max-interval: 10s
+          multiplier: 2
+
+  banner:
+    location: classpath:banner.txt
+
+management:
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    liquibase:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+decorator:
+  datasource:
+    enabled: false
+
+mongock:
+  change-logs-scan-package: io.dozator.migration

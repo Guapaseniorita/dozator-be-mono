@@ -1,0 +1,488 @@
+[
+  {
+    "category": "Кардиология",
+    "title": "Гипотензивные",
+    "subtitle": "Распределение по этапам терапии в зависимости от сопутствующих заболеваний",
+    "id": "HYPOTENSIVE",
+    "active": true
+  },
+  {
+    "category": "Кровь, Кардиология",
+    "title": "Эликвис",
+    "literature": [
+      "Инструкция по медицинскому применению лекарственного препарата Эликвис (Eliquis), ЛП-002007-210319"
+    ],
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "id": "ELIQUIS",
+    "active": true
+  },
+  {
+    "category": "Кровь, Кардиология",
+    "title": "Прадакса",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "id": "PRADAXA",
+    "active": true
+  },
+  {
+    "category": "Кровь, Кардиология",
+    "title": "Ксарелто",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "id": "XARELTO",
+    "active": true
+  },
+  {
+    "category": "Кровь, Кардиология",
+    "title": "ПОАК",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "id": "POACK",
+    "active": true
+  },
+  {
+    "category": "Анализы, Кровь",
+    "id": "GFR",
+    "title": "СКФ",
+    "subtitle": "считаем СКФ для точного дозирования",
+    "active": true
+  },
+  {
+    "category": "Анализы",
+    "id": "GFR_CKDEPI",
+    "title": "CKD-EPI",
+    "subtitle": "считаем СКФ для точного дозирования",
+    "active": false
+  },
+  {
+    "category": "Анализы",
+    "id": "GFR_COCKCROFT_GAULT",
+    "title": "Кокрофта-Голта",
+    "subtitle": "считаем СКФ для точного дозирования",
+    "active": false
+  },
+  {
+    "category": "Анализы",
+    "id": "GFR_MDRD",
+    "title": "MDRD",
+    "subtitle": "считаем СКФ для точного дозирования",
+    "active": false
+  },
+  {
+    "category": "Анализы",
+    "id": "GFR_SCHWARTZ",
+    "title": "Детям",
+    "subtitle": "считаем СКФ для точного дозирования",
+    "active": false
+  },
+  {
+    "category": "Боль",
+    "id": "NPVS",
+    "title": "НПВС",
+    "subtitle": "Важные детали дозирования НПВС при боли в спине",
+    "active": true
+  },
+  {
+    "category": "Боль",
+    "id": "NSAID_DICLOFENAC",
+    "title": "Диклофенак",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "active": true
+  },
+  {
+    "category": "Боль",
+    "id": "NSAID_MELOXICAM",
+    "title": "Мелоксикам",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "active": true
+  },
+  {
+    "category": "Боль",
+    "id": "NSAID_CELECOXIB",
+    "title": "Целекоксиб",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "active": true
+  },
+  {
+    "category": "Кардиология, Кровь",
+    "id": "WARFARIN_NVAF",
+    "title": "Варфарин",
+    "subtitle": "Целевое значение МНО 2,0-3,0",
+    "active": true
+  },
+  {
+    "category": "Кардиология, Кровь",
+    "id": "CLEXANE",
+    "title": "Эноксапарин",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "active": true
+  },
+  {
+    "category": "Кардиология, Кровь",
+    "id": "FRAXIPARINE",
+    "title": "Надропарин",
+    "subtitle": "Удовольствие от каждой дозы",
+    "active": true
+  },
+  {
+    "category": "Подагра",
+    "id": "KOLHICIN",
+    "title": "Колхицин",
+    "subtitle": "Разрешено применение с 18 лет",
+    "active": false
+  },
+  {
+      "category": "Подагра",
+      "id": "FEBUXOSTAT",
+      "title": "Фебуксостат",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+  {
+    "category": "Боль",
+    "id": "DEKSONAL",
+    "title": "Дексонал",
+    "subtitle": "Удовольствие от назначений",
+    "active": false
+  },
+  {
+    "category": "Кровь, Кардиология",
+    "id": "SUBSTITUTION_OF_ANTICOAGULANTS",
+    "title": "Замена ОАК",
+    "subtitle": "Замена ПОАК на Варфарин и наоборот, и ПОАК на ПОАК",
+    "active": true
+  },
+  {
+    "category": "Кровь, Кардиология",
+    "id": "SUBSTITUTE_WARFARIN_OAC",
+    "title": "С Варфарина",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "active": false
+  },
+  {
+    "category": "Кровь",
+    "id": "TO_WARFARIN",
+    "title": "На Варфарин",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "active": false
+  },
+  {
+    "category": "Кровь",
+    "id": "SUBSTITUTE_OAC_OAC",
+    "title": "С ПОАК на ПОАК",
+    "subtitle": "Дозируйте в 5–6 кликов",
+    "active": false
+  },
+    {
+      "category": "Эпилепсия",
+      "id": "VALPROIC_ACID",
+      "title": "Вальпроевая кислота",
+      "subtitle": "Расчёт и титрование дозы для взрослых и детей",
+      "active": true
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "VALPROIC_ACID_KIDS",
+      "title": "Вальпроевая кислота: дети",
+      "subtitle": "Расчёт и титрование дозы для детей",
+      "active": false
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "VALPROIC_ACID_ADULTS",
+      "title": "Вальпроевая кислота: взрослые",
+      "subtitle": "Расчёт и титрование дозы",
+      "active": false
+    },
+    {
+      "category": "Эпилепсия, Невралгия",
+      "id": "CARBAMAZEPINE",
+      "title": "Карбамазепин",
+      "subtitle": "Дозируйте в 5–6 кликов",
+      "active": true
+    },
+    {
+      "category": "Эпилепсия, Невралгия",
+      "id": "DETI_STARSHE_4_LET",
+      "title": "дети старше 4 лет",
+      "subtitle": "Дозируйте в 5–6 кликов",
+      "active": false
+    },
+    {
+      "category": "Эпилепсия, Невралгия",
+      "id": "VZROSLYE_I_POZHILYE_LYUDI",
+      "title": "взрослые и пожилые люди",
+      "subtitle": "Дозируйте в 5–6 кликов",
+      "active": false
+    },
+     {
+      "category": "Альцгеймер, Гериатрия, Психиатрия",
+      "id": "GALANTAMIN",
+      "title": "Галантамин",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Альцгеймер, Гериатрия, Психиатрия",
+      "id": "DONEPEZIL",
+      "title": "Донепезил",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Альцгеймер, Гериатрия, Психиатрия",
+      "id": "MEMANTINE",
+      "title": "Мемантин",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Альцгеймер, Гериатрия, Психиатрия",
+      "id": "RIVASTIGMINE",
+      "title": "Ривастигмин",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Антибиотики",
+      "id": "TELAVANCIN",
+      "title": "Телаванцин",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Антибиотики",
+      "id": "MOXIFLOXACIN",
+      "title": "Моксифлоксацин",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+     {
+      "category": "Эпилепсия",
+      "id": "LAMOTRIGINE",
+      "title": "Ламотриджин",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "LAMOTRIGINE_CHILD",
+      "title": "дети от 3 до 12 лет",
+      "subtitle": "Удовольствие от назначений",
+      "active": false
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "LAMOTRIGINE_TEEN",
+      "title": "дети старше 12",
+      "subtitle": "Удовольствие от назначений",
+      "active": false
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "LAMOTRIGINE_ADULT",
+      "title": "взрослые",
+      "subtitle": "Удовольствие от назначений",
+      "active": false
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "OXCARBAZEPINE",
+      "title": "Окскарбазепин",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "OXCARBAZEPINE_CHILD",
+      "title": "дети ",
+      "subtitle": "Удовольствие от назначений",
+      "active": false
+    },
+    {
+      "category": "Эпилепсия",
+      "id": "OXCARBAZEPINE_ADULT",
+      "title": "взрослые",
+      "subtitle": "Удовольствие от назначений",
+      "active": false
+    },
+    {
+      "category": "Болезнь Паркинсона",
+      "id": "LEVODOPA_BENSERAZIDE",
+      "title": "Леводопа+Бенсеразид",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Слабительные",
+      "id": "LAXATIVE",
+      "title": "Стимулирующие слабительные",
+      "subtitle": "Не подходят для детей",
+      "active": true
+    },
+    {
+      "category": "Слабительные",
+      "id": "LAXATIVE_BISACODYL",
+      "title": "Бисакодил",
+      "subtitle": "Не подходят для детей",
+      "active": true
+    },
+    {
+      "category": "Слабительные",
+      "id": "LAXATIVE_PICOSULFATE",
+      "title": "Пикосульфат",
+      "subtitle": "Не подходят для детей",
+      "active": true
+    },
+    {
+      "category": "Нутриенты",
+      "id": "CHOLECALCIFEROL",
+      "title": "Витамин D",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+    {
+      "category": "Болезнь Паркинсона",
+      "id": "LEVODOPA_CARBIDOPA",
+      "title": "Леводопа+Карбидопа",
+      "subtitle": "Удовольствие от назначений",
+      "active": true
+    },
+      {
+      "category": "Антибиотики",
+      "id": "VANCOMYCIN_ADULT",
+      "title": "Ванкомицин",
+      "subtitle": "Взрослые и дети от 12 до 17",
+      "active": true
+    },
+    {
+      "category": "Антибиотики",
+      "id": "VANCOMYCIN_CHILD",
+      "title": "Ванкомицин",
+      "subtitle": "Взрослые и дети от 12 до 17",
+      "active": false
+    },
+    {
+      "category": "Антибиотики",
+      "id": "VANCOMYCIN",
+      "title": "Ванкомицин",
+      "subtitle": "Взрослые и дети от 12 до 17",
+      "active": false
+    }, 
+    {
+      "category": "Общее",
+      "id": "BODY_AREA",
+      "title": "доза по S тела",
+      "subtitle": "Рассчитайте дозу препарата по площади поверхности тела пациента",
+      "active": false
+    },
+    {
+      "category": "Общее",
+      "id": "SOLUTION_CALCULATION",
+      "title": "концентрация растворов",
+      "subtitle": "Рассчитайте дозу препарата по площади поверхности тела пациента",
+      "active": true
+    },
+    {
+      "category": "Общее",
+      "id": "SOLUTION_CONCENTRATION_CALCULATION",
+      "title": "Концентрацию раствора по M и V",
+      "subtitle": "Рассчитайте дозу препарата по площади поверхности тела пациента",
+      "active": false
+    },
+    {
+      "category": "Общее",
+      "id": "SOLUTION_MASS_CALCULATION",
+      "title": "Массу вещества по С и V",
+      "subtitle": "Рассчитайте дозу препарата по площади поверхности тела пациента",
+      "active": false
+    },
+    {
+      "category": "Общее",
+      "id": "SOLUTION_VOLUME_CALCULATION",
+      "title": "Объем растворителя",
+      "subtitle": "Рассчитайте дозу препарата по площади поверхности тела пациента",
+      "active": false
+    },
+    {
+      "category": "Общее",
+      "id": "GCS",
+      "title": "ГКС",
+      "subtitle": "Пересчитайте дозу ГКС в абсолютных величинах и, если это необходимо - к весу пациента",
+      "active": true
+    },
+    {
+      "category": "Общее",
+      "id": "GCS_CONVERTER_BY_DRUG",
+      "title": "Конвертация по дозе",
+      "subtitle": "Пересчитайте дозу ГКС в абсолютных величинах и, если это необходимо - к весу пациента",
+      "active": false
+    },
+    {
+      "category": "Общее",
+      "id": "GCS_CONVERTER_BY_WEIGHT",
+      "title": "Конвертация по весу",
+      "subtitle": "Пересчитайте дозу ГКС в абсолютных величинах и, если это необходимо - к весу пациента",
+      "active": false
+    },
+    {
+      "category": "Общее",
+      "id": "GOUCKE",
+      "title": "Шкала Гокэ",
+      "subtitle": "Шкала Гокэ в модификации Г.М. Савелевой используется для оценки тяжести гестоза у беременных",
+      "active": true
+    },
+    {
+      "category": "Общее",
+      "id": "VTEC",
+      "title": "ВТЭО ",
+      "subtitle": "Оценка риска ВТЭО во время родов и послеродовом периоде",
+      "active": true
+    },
+    {
+      "category": "Общее",
+      "id": "CHAD2DS2VASC",
+      "title": "Шкала CHA2DS2VASc",
+      "subtitle": "Оценка риска инсульта и тромбоэмболий у пациентов с фибрилляцией/трепетанием предсердий",
+      "active": true
+    },
+    {
+      "category": "Кровь, Нутриенты",
+      "id": "IRON",
+      "title": "препараты железа",
+      "subtitle": "Ориентировочная курсовая доза препарата железа при парентеральном введении и схемы для пероральных препаратов",
+      "active": true
+    },
+    {
+      "category": "Кровь, Нутриенты",
+      "id": "IRON_ORALLY",
+      "title": "препараты железа",
+      "subtitle": "Ориентировочная курсовая доза препарата железа при парентеральном введении и схемы для пероральных препаратов",
+      "active": false
+    },
+    {
+      "category": "Кровь, Нутриенты",
+      "id": "IRON_PARENTERALLY",
+      "title": "препараты железа",
+      "subtitle": "Ориентировочная курсовая доза препарата железа при парентеральном введении и схемы для пероральных препаратов",
+      "active": false
+    },
+    {
+      "category": "Кровь, Кардиология",
+      "id": "HASBLED",
+      "title": "Шкала HAS BLED",
+      "subtitle": "Оценка риска кровотечений у пациентов с ФП, получающих антикоагулянты\n\n",
+      "active": true
+    },
+    {
+      "category": "Гериатрия, Деменция, Альцгеймер",
+      "id": "MMSE",
+      "title": "MMSE",
+      "subtitle": "Краткая шкала оценки психического статуса (Mini Mental State Assessment) помогает назначить антидементные препараты\n",
+      "active": true
+    },
+    {
+      "category": "Гериатрия",
+      "id": "GERONTONET",
+      "title": "GerontoNet",
+      "subtitle": "Шкала GerontoNet (оценка риска НЛР у госпитализированных пожилых пациентов)",
+      "active": true
+    }
+]
