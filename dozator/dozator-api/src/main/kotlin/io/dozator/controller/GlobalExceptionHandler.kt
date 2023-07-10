@@ -10,6 +10,7 @@ import io.dozator.dto.error.ErrorDto
 import org.apache.catalina.connector.ClientAbortException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.http.converter.HttpMessageNotWritableException
@@ -27,7 +28,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(Exception::class)
-    fun handleGenericException(ex: Exception, request: WebRequest): ResponseEntity<Any> {
+    fun handleGenericException(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         val responseStatus = findResponseStatus(ex) ?: return handleInternalError(ex, request)
         val reason = responseStatus.reason.ifEmpty { ex.message }
         logException(ex, request)
@@ -40,7 +41,7 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         )
     }
 
-    protected fun handleInternalError(ex: Exception, request: WebRequest): ResponseEntity<Any> {
+    protected fun handleInternalError(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         logInternalError(ex)
         return super.handleExceptionInternal(
             ex,
@@ -55,21 +56,21 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     protected fun handleResponseStatusException(
         ex: ResponseStatusException,
         request: WebRequest,
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<Any>? {
         val error = ErrorDto(
-            status = ex.status.value(),
+            status = ex.statusCode.value(),
             msg = ex.reason,
             exception = ex
         )
         logException(ex, request)
-        return super.handleExceptionInternal(ex, error, HttpHeaders.EMPTY, ex.status, request)
+        return super.handleExceptionInternal(ex, error, HttpHeaders.EMPTY, ex.statusCode, request)
     }
 
     @ExceptionHandler(ClientAbortException::class)
     protected fun handleBrokenPipeException(
         ex: ClientAbortException,
         request: WebRequest,
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<Any>? {
         log.warn("Broken pipe during request", ex)
         return super.handleExceptionInternal(
             ex,
@@ -80,31 +81,31 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         )
     }
 
-    override fun handleBindException(
-        ex: BindException,
-        headers: HttpHeaders,
-        status: HttpStatus,
-        request: WebRequest,
-    ): ResponseEntity<Any> {
-        val fieldError = ex.fieldError
-        var error = ErrorDto(HttpStatus.BAD_REQUEST.value(), "parameters binding error", request)
-        if (fieldError != null) {
-            error = ErrorDto(
-                HttpStatus.BAD_REQUEST.value(),
-                "'" + fieldError.field + "' wrong value: " + fieldError.rejectedValue,
-                ex
-            )
-        }
-        logException(ex, request)
-        return super.handleExceptionInternal(ex, error, HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST, request)
-    }
+//    override fun handleBindException(
+//        ex: BindException,
+//        headers: HttpHeaders,
+//        status: HttpStatus,
+//        request: WebRequest,
+//    ): ResponseEntity<Any>? {
+//        val fieldError = ex.fieldError
+//        var error = ErrorDto(HttpStatus.BAD_REQUEST.value(), "parameters binding error", request)
+//        if (fieldError != null) {
+//            error = ErrorDto(
+//                HttpStatus.BAD_REQUEST.value(),
+//                "'" + fieldError.field + "' wrong value: " + fieldError.rejectedValue,
+//                ex
+//            )
+//        }
+//        logException(ex, request)
+//        return super.handleExceptionInternal(ex, error, HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST, request)
+//    }
 
     override fun handleMethodArgumentNotValid(
         ex: MethodArgumentNotValidException,
         headers: HttpHeaders,
-        status: HttpStatus,
-        request: WebRequest,
-    ): ResponseEntity<Any> {
+        status: HttpStatusCode,
+        request: WebRequest
+    ): ResponseEntity<Any>? {
         val errorMessage = ex.javaClass.simpleName + ": " + ex.message
         val allErrors = ex.bindingResult.allErrors
 
@@ -124,9 +125,9 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     override fun handleHttpMessageNotReadable(
         ex: HttpMessageNotReadableException,
         headers: HttpHeaders,
-        status: HttpStatus,
-        request: WebRequest,
-    ): ResponseEntity<Any> {
+        status: HttpStatusCode,
+        request: WebRequest
+    ): ResponseEntity<Any>? {
         val error = when (val cause = ex.cause) {
             is MissingKotlinParameterException -> {
                 ErrorDto(
@@ -144,9 +145,9 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     override fun handleMissingServletRequestParameter(
         ex: MissingServletRequestParameterException,
         headers: HttpHeaders,
-        status: HttpStatus,
-        request: WebRequest,
-    ): ResponseEntity<Any> {
+        status: HttpStatusCode,
+        request: WebRequest
+    ): ResponseEntity<Any>? {
         val errorMessage = ex.javaClass.simpleName + ": " + ex.message
         val error = ErrorDto(HttpStatus.BAD_REQUEST.value(), errorMessage, ex)
         logException(ex, request)
@@ -156,9 +157,9 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     override fun handleHttpMessageNotWritable(
         ex: HttpMessageNotWritableException,
         headers: HttpHeaders,
-        status: HttpStatus,
-        request: WebRequest,
-    ): ResponseEntity<Any> {
+        status: HttpStatusCode,
+        request: WebRequest
+    ): ResponseEntity<Any>? {
         logInternalError(ex)
         return super.handleHttpMessageNotWritable(ex, headers, status, request)
     }

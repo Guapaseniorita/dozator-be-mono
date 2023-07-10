@@ -1,7 +1,7 @@
 import org.gradle.api.Project
 
 object DockerImage {
-    const val BASE_IMAGE = "docker.io/adoptopenjdk/openjdk11:x86_64-ubuntu-jre-11.0.11_9"
+    const val BASE_IMAGE = "openjdk:17-oracle"
 
     const val CREATION_TIME = "USE_CURRENT_TIMESTAMP"
 
@@ -12,9 +12,10 @@ object DockerImage {
             "-Duser.timezone=UTC",
             "-XX:MaxRAMPercentage=55.0",
             "-XX:+UseG1GC",
-            "-XX:+UseStringDeduplication"
+            "-XX:+UseStringDeduplication",
+            "-Dspring.config.additional-location=optional:/etc/dozator/application.yml"
     )
 
     fun imagePath(project: Project): String =
-            "registry.gitlab.com/dozator_lekarstv/dozator-be-mono/" + project.property("name") + ":" + project.property("docker.tag")
+            "registry.gitlab.com/dozator_lekarstv/dozator-be-mono_clone/" + project.property("name") + ":" + project.property("docker.tag")
 }

@@ -1,9 +1,9 @@
 package io.dozator.domain
 
+import jakarta.persistence.Column
+import jakarta.persistence.MappedSuperclass
 import java.io.Serializable
 import java.time.OffsetDateTime
-import javax.persistence.Column
-import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
 abstract class AbstractEntity : Serializable {

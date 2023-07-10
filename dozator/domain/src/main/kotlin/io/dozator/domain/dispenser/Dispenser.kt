@@ -1,7 +1,7 @@
 package io.dozator.domain.dispenser
 
+import jakarta.persistence.Id
 import org.springframework.data.mongodb.core.mapping.Field
-import javax.persistence.Id
 
 abstract class Dispenser {
 

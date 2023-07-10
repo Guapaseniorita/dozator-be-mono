@@ -1,27 +1,13 @@
 stages:
-  - build
-  - deploy
-
-image: docker
-services:
-  - docker:dind
-
+  - dozator-build
 
 build:
-  stage: build
+  image: openjdk:17-oracle
+  stage: dozator-build
+  before_script:
+    - export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+    - chmod +x gradlew
   script:
-    - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com 2>1
-    - sh gradlew jar jib -Pdocker.tag=${CI_PIPELINE_ID}
+    - ./gradlew -Pdocker.tag=$CI_COMMIT_TAG -Pregistry.user=$CI_REGISTRY_USER -Pregistry.password=$CI_REGISTRY_PASSWORD :dozator:dozator-api:jibGitlab
   only:
-    - master
-    - develop
-
-deploy-develop:
-  stage: deploy
-  script:
-    - docker run -d -p 5034:5432 --name dozator-postgres-dev -v /opt/develop/postgresql/data/:/var/lib/postgresql/data --log-driver json-file -e POSTGRES_USER=dozator -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=dozator --network internal-dev postgres:11.9
-    - docker run -d -p 22017:27017 --name dozator-mongodb-dev -v ./tools/mongo/init_schema.js:/docker-entrypoint-initdb.d/mongo-init.js:ro -v /opt/develop/mongo/data/db/:/data/db --log-driver json-file -e MONGO_INITDB_ROOT_USERNAME=dozator -e MONGO_INITDB_ROOT_PASSWORD=secret --network internal-dev mongo:5.0
-    - sleep 10
-    - docker run -d -p 8901:8901 --name dozator-backend-dev -e MONGO_INITDB_ROOT_HOST=dozator-mongodb-dev -e MONGO_INITDB_ROOT_PORT=27017 -e MONGO_INITDB_ROOT_DATABASE=dozator  -e MONGO_INITDB_ROOT_USERNAME=dozator -e MONGO_INITDB_ROOT_PASSWORD=secret -e POSTGRES_HOST=dozator-postgres-dev -e POSTGRES_PORT=5432 -e POSTGRES_DATABASE=dozator -e POSTGRES_USERNAME=dozator -e POSTGRES_PASSWORD=secret --network internal-dev registry.gitlab.com/dozator_lekarstv/dozator-be-mono/dozator-api:${CI_PIPELINE_ID}
-  only:
-    - develop
+    - tags

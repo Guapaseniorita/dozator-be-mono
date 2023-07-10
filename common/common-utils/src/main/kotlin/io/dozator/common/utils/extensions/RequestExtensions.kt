@@ -1,8 +1,8 @@
 package io.dozator.common.utils.extensions
 
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.web.context.request.ServletWebRequest
 import org.springframework.web.context.request.WebRequest
-import javax.servlet.http.HttpServletRequest
 
 val WebRequest.url get(): String = (this as ServletWebRequest).request.url
 

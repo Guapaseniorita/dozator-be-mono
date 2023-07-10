@@ -3,7 +3,7 @@ package io.dozator.domain.content
 import io.dozator.domain.AbstractEntity
 import io.dozator.domain.WithIdGenerator
 import io.dozator.domain.generateId
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 class Content : AbstractEntity(), WithIdGenerator {

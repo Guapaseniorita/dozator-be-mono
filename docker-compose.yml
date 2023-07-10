@@ -1,66 +1,79 @@
-version: '3'
+version: "3.9"
+
 services:
-  dozator-db-dev:
-    container_name: dozator-db-dev
-    image: postgres:11.9
-    volumes: 
-      - /opt/develop/postgresql/data/:/var/lib/postgresql/data
-    ports:
-      - "5133:5432"
-    networks:
-      - internal
-    logging:
-      driver: json-file
-    environment:
-      - POSTGRES_USER=dozator
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=dozator
-  dozator-mongo-dev:
-    container_name: dozator-mongo-dev
-    image: mongo:5.0
-    volumes:
-      - ./tools/mongo/init_schema.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-      - /opt/develop/mongo/data/db/:/data/db
-    networks:
-      - internal
-    logging:
-      driver: json-file
-    ports:
-      - "26018:27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=dozator
-      - MONGO_INITDB_ROOT_PASSWORD=secret
-  backend-dev:
-    container_name: dozator-back-dev
-    image: registry.gitlab.com/dozator_lekarstv/dozator-be-mono/dozator-api:11136
+
+  backend.dozator.io:
+    container_name: dozator-backend
+    image: dozator:latest
+    restart: always
     depends_on:
-      - dozator-db-dev
-      - dozator-mongo-dev
-        #links:
-        #- dozator-db
-        #- dozator-mongo
+      postgresql.dozator.io:
+        condition: service_healthy
+      mongodb.dozator.io:
+        condition: service_healthy
     ports:
-      - 127.0.0.1:8901:8901
+      - "8901:8901"
     networks:
-      - internal
+      - dozator-network
     environment:
-      - MONGO_INITDB_ROOT_HOST=dozator-mongo-dev
-      - MONGO_INITDB_ROOT_PORT=27017
-      - MONGO_INITDB_ROOT_DATABASE=dozator
-      - MONGO_INITDB_ROOT_USERNAME=dozator
-      - MONGO_INITDB_ROOT_PASSWORD=secret
-      - POSTGRES_HOST=dozator-db-dev
-      - POSTGRES_PORT=5432
-      - POSTGRES_DATABASE=dozator
+      - MONGO_USERNAME=dozator
+      - MONGO_PASSWORD=secret
       - POSTGRES_USERNAME=dozator
       - POSTGRES_PASSWORD=secret
+      - SPRINGPROFILES=default,actuator
 
+  postgresql.dozator.io:
+    container_name: dozator-postgresql
+    image: postgres:11.9
+    restart: always
+    volumes:
+      - static-content-postgresql:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - "5430:5432"
+    networks:
+      - dozator-network
+    logging:
+      driver: json-file
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_DB=dozator
+      - POSTGRES_USER=dozator
+      - POSTGRES_PASSWORD=secret
 
-
-networks:
-  internal:
-    driver: bridge
+  mongodb.dozator.io:
+    container_name: dozator-mongodb
+    image: mongo:5.0
+    restart: always
+    volumes:
+      - ./docker/mongo/init_schema.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - static-content-mongodb:/data/db
+    networks:
+      - dozator-network
+    logging:
+      driver: json-file
+    expose:
+      - 27017
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dozator
+      - MONGO_INITDB_ROOT_PASSWORD=secret
 
 volumes:
-  mongodata:
-    #    external: true
+  static-content-postgresql:
+  static-content-mongodb:
+
+networks:
+  dozator-network:
+    driver: bridge

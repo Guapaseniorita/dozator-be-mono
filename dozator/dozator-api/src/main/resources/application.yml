@@ -8,15 +8,15 @@ server:
 logging:
   config: classpath:logback-spring.xml
   level:
-    io.dozator: DEBUG
-    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
-    ROOT: INFO
+    io.dozator: info
 
 spring:
   main:
     allow-bean-definition-overriding: true
+
   application:
     name: dozator-api
+
   jackson:
     default-property-inclusion: non_null
     serialization:
@@ -24,13 +24,13 @@ spring:
       fail-on-empty-beans: false
     mapper:
       accept-case-insensitive-enums: true
+
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?rewriteBatchedStatements=true&assumeMinServerVersion=9.0
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/dozator?rewriteBatchedStatements=true&assumeMinServerVersion=9.0
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
-    validationQuery: SELECT 1
-    batch-size: 20000
-    max-active: 10
+    host: postgresql.dozator.io
+    port: 5432
     hikari:
       maximum-pool-size: 3
       minimum-idle: 1
@@ -40,9 +40,10 @@ spring:
       connectionTimeout: 30000
     tomcat:
       max-active: 3
+
   jpa:
     open-in-view: true
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: POSTGRESQL
     properties:
       hibernate:
@@ -61,16 +62,18 @@ spring:
         event:
           merge:
             entity_copy_observer: allow
+
   data:
     mongodb:
-      host: ${MONGO_INITDB_ROOT_HOST}
-      port: ${MONGO_INITDB_ROOT_PORT}
-      database: ${MONGO_INITDB_ROOT_DATABASE}
-      username: ${MONGO_INITDB_ROOT_USERNAME}
-      password: ${MONGO_INITDB_ROOT_PASSWORD}
+      host: mongodb.dozator.io
+      port: 27017
+      database: dozator
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
     jpa:
       repositories:
         bootstrap-mode: lazy
+
   liquibase:
     enabled: true
     change-log: classpath:liquibase/master.xml
@@ -85,6 +88,7 @@ spring:
       max-request-size: 50MB
       enabled: true
       file-size-threshold: 12KB
+
   rabbitmq:
     listener:
       simple:
