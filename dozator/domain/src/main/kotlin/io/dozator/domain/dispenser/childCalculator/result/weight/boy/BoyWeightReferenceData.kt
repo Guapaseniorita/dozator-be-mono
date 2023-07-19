@@ -2,8 +2,9 @@ package io.dozator.domain.dispenser.childCalculator.result.weight.boy
 
 import io.dozator.domain.dispenser.childCalculator.ChildCalculatorResultType
 import io.dozator.domain.dispenser.childCalculator.result.child.ReferenceData
+import org.springframework.stereotype.Component
 import weight.boy.*
-
+@Component
 class BoyWeightReferenceData(weight: Double) : ReferenceData() {
     override val type: ChildCalculatorResultType = ChildCalculatorResultType.BOY_WEIGHT
     init {

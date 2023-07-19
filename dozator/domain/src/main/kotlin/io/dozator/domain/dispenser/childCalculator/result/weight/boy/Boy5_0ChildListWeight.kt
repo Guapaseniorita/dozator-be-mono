@@ -1,6 +1,8 @@
 package weight.boy
 
-import child.ChildResult
+
+
+import io.dozator.domain.dispenser.childCalculator.result.child.ChildResult
 
 class Boy5_0ChildListWeight(weight: Double) : ChildListWeightBoy() {
     private val age = "5.0"

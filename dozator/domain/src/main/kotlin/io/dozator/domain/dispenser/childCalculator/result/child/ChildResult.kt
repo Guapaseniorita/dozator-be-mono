@@ -52,27 +52,6 @@ class ChildResult(start: Double, end: Double) {
                """.trimIndent()
     }
 
-//    fun setNorma(age: String?, x: Optimal, type: String) {
-//        this.message = "Заключение: норма"
-//    }
-//
-//    fun setLowNorma(age: String?, x: Optimal, type: String) {
-//        this.message = "Заключение: низкая норма"
-//
-//    }
-//
-//    fun setBelowNorm(age: String?, x: Optimal, type: String) {
-//        this.message = "Заключение: ниже нормы"
-//    }
-//
-//    fun setAboveNorm(age: String?, x: Optimal, type: String) {
-//        this.message = "Заключение: выше нормы"
-//    }
-//
-//    fun setHighNorm(age: String?, x: Optimal, type: String) {
-//        this.message = "Заключение: высокая норма"
-//    }
-
     fun setOptimal(x: Optimal, age: String?, type: String): String? {
         return x.getRate(age, type)
     }
