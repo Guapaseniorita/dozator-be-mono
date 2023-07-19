@@ -66,6 +66,7 @@ subprojects {
         implementation(Kotlin.stdlib)
         implementation(Kotlin.stdlib.common)
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:_")
+        implementation("org.apache.commons:commons-lang3:3.12.0")
     }
 }
 
