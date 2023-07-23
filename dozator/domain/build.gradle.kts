@@ -12,8 +12,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-json")
-
-    implementation("org.apache.commons:commons-lang3:_")
+    implementation ("commons-lang:commons-lang:2.6")
 }
 
 allOpen {
